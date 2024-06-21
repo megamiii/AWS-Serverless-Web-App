@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  localstack:
+    image: localstack/localstack
+    ports:
+      - "4566:4566"  # LocalStack edge service port
+      - "4571:4571"  # Lambda API service port
+    environment:
+      - SERVICES=s3,dynamodb,lambda,apigateway
+      - DEBUG=1
+    volumes:
+      - "./localstack_setup.sh:/docker-entrypoint-initaws.d/localstack_setup.sh"
